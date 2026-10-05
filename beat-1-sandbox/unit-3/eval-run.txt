@@ -1,0 +1,33 @@
+﻿# Unit 3 Eval Run Results
+
+**Date:** 2026-10-05
+**Status:** PASS
+
+## Full Eval Results (20 packages)
+
+Agreement: 19/20 (goal: 18/20) ✓
+
+### Category Breakdown
+- clear-accept: 6/7 (1 disagreement: pkg-14)
+- scope-creep: 4/4 ✓
+- thread-convention: 2/2 ✓
+- unbuildable: 3/3 ✓
+- wrong-cause: 4/4 ✓
+
+### Disagreement Details
+**pkg-14** (zellij-org/zellij#5174)
+- Gold: ACCEPT (clear-accept)
+- Verdict: REJECT
+- Reason: "Stranger can execute it" check
+- Note: Gold label notes call this "arguable on deferral"; pkg has scoped-down fix with known limitations
+
+## Rubric Checks (5 Required)
+1. Diagnosis grounded in repro evidence
+2. Scope is bounded
+3. Stranger can execute it
+4. Test plan is decisive
+5. Comment respects thread and conventions
+
+## Next Steps
+- Ready for live mode: apply to real issue #69
+- Calibration packages not yet tested (optional refinement)
