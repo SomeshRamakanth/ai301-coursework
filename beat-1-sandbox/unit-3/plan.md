@@ -74,3 +74,7 @@ The `parse_review_output()` function in `rag/generator/output_parser.py` calls `
 
 - **Risk:** Other parts of the codebase may depend on JSON parsing always succeeding for certain inputs. Mitigation: Run full test suite after fix.
 - **Unknown:** Whether there are other top-level JSON types that could cause similar crashes. Mitigation: Type guard is specific to `dict`, so other types also fall through gracefully.
+
+## Deviations
+
+The implementation followed the plan exactly. No changes were made to the approach, scope, or test plan. The type guards were added at both identified locations, warnings were logged, and the plaintext fallback was engaged for arrays—all as planned. The fix passed all tests without requiring adjustments to the original strategy.

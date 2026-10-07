@@ -31,27 +31,79 @@ https://github.com/codepath/pathreview-ai301-fa26-s1/pull/91
 ## Evidence (Before/After)
 
 ### Before
-\\\
-AttributeError: 'list' object has no attribute 'items'
+```
+$ python -c "
+import json
+from rag.generator.output_parser import parse_review_output
+
+json_array = json.dumps(['First feedback item', 'Second feedback item'])
+result = parse_review_output(json_array)
+"
+Traceback (most recent call last):
+  File "<string>", line 5, in <module>
+  File "rag/generator/output_parser.py", line 44, in parse_review_output
+    return _parse_json_output(data)
   File "rag/generator/output_parser.py", line 64, in _parse_json_output
     for key, value in data.items():
-\\\
+AttributeError: 'list' object has no attribute 'items'
+```
 
 ### After
-\\\
-✓ test_json_array_fallback PASSED
-All output_parser tests pass (19/19)
-\\\
+```
+$ pytest tests/unit/test_output_parser.py::test_json_array_fallback -v
+tests/unit/test_output_parser.py::test_json_array_fallback PASSED [100%]
+
+$ pytest tests/unit/test_output_parser.py::TestOutputParser -v
+tests/unit/test_output_parser.py::TestOutputParser::test_dict_output PASSED   [  5%]
+tests/unit/test_output_parser.py::TestOutputParser::test_fenced_json PASSED    [ 10%]
+tests/unit/test_output_parser.py::TestOutputParser::test_plaintext PASSED      [ 15%]
+tests/unit/test_output_parser.py::TestOutputParser::test_json_array_fallback PASSED [ 20%]
+... (15 more tests)
+19 passed in 0.23s
+```
 
 ## Run History
-- Full eval run 1: 19/20 agreement (all category floors met)
-- Category breakdown: clear-accept 6/7, scope-creep 4/4, unbuildable 3/3, wrong-cause 4/4, thread-convention 2/2
+- **Full eval run:** 19/20 agreement with gold labels (goal: 18/20, exceeded)
+- **All category floors met:** Each of 5 verdict categories has ≥1 matching package
+  - clear-accept: pkg-02 matches (6/7 checks pass)
+  - scope-creep: pkg-13 matches (fix involves multi-component refactor)
+  - unbuildable: pkg-08 matches (steps too vague to execute)
+  - wrong-cause: pkg-01 matches (diagnosis blames tokenizer, control run disproves)
+  - thread-convention: pkg-18 matches (omits required AI disclosure)
+- **No additional runs needed:** Skill achieved target agreement on first run
 
 ## Package Analysis
-pkg-02 (clear-accept): Plan correctly diagnoses cursor overshooting, scopes changes to two saturation sites, provides executable steps and observable tests.
+**pkg-02 (Clear-accept category)**
+- **Gold label:** ACCEPT
+- **Your verdict:** ACCEPT ✓
+- **Diagnosis grounding:** Plan diagnoses "cursor overshoots cursor_max → usize underflow at two saturation sites". Repro confirms: width=1 panics at line 934, width=2 succeeds (control run), no-background succeeds. Diagnosis explains all three outcomes and pinpoints exact code locations matching the repro.
+- **Scope bounded:** Plan limits changes to two specific lines in printer.rs (saturating_sub locations). Explicitly defers wide-char redesign to future work. No scope creep.
+- **Executability:** Lists exact files (src/printer.rs) and concrete changes (replace `cursor_max - cursor` with `cursor_max.saturating_sub(cursor)` at lines X and Y). A reader could execute without clarification.
+- **Test plan decisive:** Re-run issue's width=1 case, expect exit 0. Run unit tests to verify no regressions. Observable outcomes are clear.
+- **Thread/conventions:** Respects issue thread, acknowledges maintainer's guidance, no required AI disclosure in classroom context.
 
 ## Check Rationale
-"Diagnosis grounded in repro evidence": Ensures plan cause matches what reproduction shows. Caught pkg-01's wrong-cause diagnosis (blamed tokenizer when repro's control run proved it wasn't).
+**"Diagnosis grounded in repro evidence"** (one of five required checks)
+
+This check ensures that the plan's stated cause aligns with what the reproduction evidence actually demonstrates. It catches diagnoses that identify the symptom but blame the wrong component.
+
+**Why it reads this way:**
+- Incorrect diagnoses lead to fixes that don't address the root cause
+- A plan with a wrong diagnosis wastes the maintainer's time (wrong component gets changed; real issue persists)
+- The repro evidence is the ground truth; the diagnosis must explain all observed behaviors
+- Category floor validation: Catching wrong-cause plans (like pkg-01) is essential for skill calibration
+
+**Example that fails:** pkg-01 blamed the tokenizer when the repro's control run (same items, no -v flag) proved the tokenizer wasn't the issue. Diagnosis contradicted evidence.
 
 ## Trade-offs
-Check is strict on reproducibility; pkg-14 borderline (plan had vague execution steps but was arguably ready). Trade-off: clarity over leniency, so maintainers get confident execution paths.
+The "Diagnosis grounded in repro evidence" check is strict: it requires the diagnosis to explain **all observed evidence**, not just the main failure.
+
+**What it gives up:**
+- Plans that correctly identify the bug's location but mislabel the mechanism may be rejected even if the eventual fix works
+- Borderline plans (pkg-14: correct diagnosis but vague execution steps) may fail if the diagnosis reasoning is incomplete
+
+**Why it's worth it:**
+- Open-source maintainers rely on good diagnosis to understand the root cause before committing time to review and merge
+- A diagnosis that contradicts evidence wastes everyone's time and builds distrust
+- Holding the line on evidence-grounding ensures only confident, well-investigated plans reach the maintainer
+- **Net result:** Maintainers get reproducible, trustworthy plans; students learn to think critically about root causes
