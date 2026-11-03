@@ -199,6 +199,8 @@ Refined type handling to use only `# type: ignore[attr-defined]` per professiona
 
 **Link:** https://github.com/ImperialCollegeLondon/proCAT/pull/865
 
+**Claim Comment:** https://github.com/ImperialCollegeLondon/proCAT/issues/862#issuecomment-6593068136
+
 **Summary**
 
 Filters project lead and allocation user dropdowns to display only RSE Team members, sorted alphabetically. Added 4 comprehensive tests with 100% coverage. Includes code review iteration on type safety.
