@@ -1,4 +1,4 @@
-# Contribution: [Style]: Unwanted space should be deleted on the Analysis page
+# Contribution 1: [Style]: Unwanted space should be deleted on the Analysis page
 
 Path: `beat-2-contribution/contribution-story.md`
 
