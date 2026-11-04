@@ -20,21 +20,7 @@ Contribution Number stays `[1]` unless you make more than one contribution this 
 
 Every story section below, from Why I Chose This Issue through Pull Request, ends with a Toolkit block: which tool did that phase's work and how you used it, what it produced, what difficulties or shortcomings it presented, and what you changed or would change because of them. Together the blocks are the thread the rubric's Toolkit points read, and they are the raw material for your unit-9 portfolio, so keep them current as you work rather than reconstructing them later.
 
-A Toolkit block looks like this (copy it into each story section and fill it there):
-
-```text
-**Toolkit**
-
-- Tool: [which tool did this phase's work, and how you used it]
-- What it produced: [described in a sentence or a short excerpt]
-- Difficulties: [what fought you or fell short, or "none met"]
-- What changed: [the patch, revision, or workaround, what you would
-  update, or "nothing"]
-```
-
-This section also keeps one short dated entry per week of tool work, starting below: what you built or changed that week, what broke, and what you changed because of it. The blocks tell the story where it happened; these entries are the toolkit's own timeline.
-
-All four entries are graded. Keep every heading below, and fill each one in the week it belongs to.
+This section keeps one short dated entry per week of tool work: what you built or changed that week, what broke, and what you changed because of it. The Toolkit blocks in each story section tell the story where it happened; these entries are the toolkit's own timeline. All four entries are graded.
 
 **Unit 5: Issue selection and strategy for Django form filtering**
 
