@@ -42,21 +42,21 @@ Final code review approved by Diego with comment "Brilliant! All good!" PR #865 
 
 ## Why I Chose This Issue
 
-I ran the issue-scout skill to evaluate Python and Django backend issues from the AI301 Issue Selection site. My scout graded multiple candidates and accepted proCAT #862 with a "moderate difficulty" verdict: filter users to show only RSE Team members in forms. I chose this issue over simpler UI-only work for several reasons:
+I ran the issue-scout skill to evaluate Python and Django backend issues from the AI301 Issue Selection site. My scout evaluated candidates using a scope-feasible rubric with these required checks: repo actively pushed, repo not archived, issue is one bounded piece of work, nobody already assigned, AI-contribution policy allows this workflow, maintainer responds quickly, and repo has real users. ProCAT #862 passed all required checks — "accept" verdict with "moderate difficulty" rating. The issue: filter users to show only RSE Team members in forms. I chose this over simpler UI-only work for several reasons:
 
 1. **Complexity**: Django form customization with ORM filtering and group-based permissions — backend logic requiring deeper understanding than styling changes.
 2. **Test coverage**: The fix demanded writing 4 comprehensive tests covering both filtering logic and alphabetical sorting, verifiable through test output.
 3. **Type safety**: Understanding Python's typing system and proper mypy configuration with Django form fields taught professional coding standards.
 4. **Code review**: Active maintainer (Diego Alonso Álvarez) provided substantive feedback on type safety, offering real learning through professional code review iteration.
 
-The issue had clear bounded scope, recent activity, and thorough documentation. Choosing this over simpler issues demonstrated commitment to deeper engineering work: implementation, comprehensive testing, type safety handling, and professional feedback response.
+The issue satisfied scout criteria: clear bounded scope (filter two form fields), recent activity (repo pushed today, issue open), thorough documentation (issue description named specific fields and expected behavior), and active maintainer (Diego reviewed within 24 hours). Choosing this over simpler issues demonstrated commitment to deeper engineering work: implementation, comprehensive testing, type safety handling, and professional feedback response.
 
 **Toolkit**
 
-- Tool: issue-scout skill with scope-feasible rubric check; graded proCAT #862 against required checks (repo actively pushed, scope bounded, nobody assigned, AI policy allows contribution); scout verdict: accept, moderate difficulty
-- What it produced: Ranked list of candidates with verdicts showing proCAT #862 as a solid match with learning opportunity in Django form customization and type safety
-- Difficulties: Understanding how to read scout's "moderate difficulty" note; interpreting whether "nobody assigned" held given the issue's existing comments
-- What changed: Recognized that scout's difficulty rating was accurate — the type-safety feedback from code review confirmed the "moderate" assessment was realistic
+- Tool: issue-scout skill with scope-feasible rubric; evaluated proCAT #862 against 7 required checks (repo actively pushed ✓, repo not archived ✓, scope bounded ✓, nobody assigned ✓, AI policy allows ✓, maintainer responds quickly ✓, repo has real users ✓); verdict: accept with "moderate difficulty" rating
+- What it produced: Clear verdict showing proCAT #862 as acceptable match; difficulty rating indicated manageable but substantive work with learning opportunity in Django form customization and type safety
+- Difficulties: Interpreting scout's "moderate difficulty" meant real complexity, not marketing language; determining whether "nobody assigned" still held given existing comments in issue thread
+- What changed: Recognized that scout's verdict and difficulty assessment proved accurate — the type-safety code review feedback directly confirmed the "moderate" rating; learned that scout's rubric criteria (bounded scope, active maintainer, recent activity) predicted real working conditions
 
 ---
 
@@ -81,10 +81,10 @@ Form dropdowns display all system users (50+) without filtering or sorting. Both
 
 **Toolkit**
 
-- Tool: Code inspection, Django documentation, pytest
-- What it produced: Understanding of Django form queryset filtering and group-based permissions
-- Difficulties: Understanding how Django form fields relate to model queryset filtering
-- What changed: Identified need to override form __init__ to customize field querysets
+- Tool: Code inspection using Django documentation, scout's scope-feasible assessment (which required issue to be "one bounded piece of work"), pytest exploration
+- What it produced: Understanding of Django form queryset filtering and group-based permissions; scout's scope boundary helped focus on exactly two fields (lead, user) rather than broader refactor
+- Difficulties: Understanding how Django form fields relate to model querysets (inheritance from related model); scout's "bounded scope" check forced clarity on what "done" meant
+- What changed: Identified need to override form __init__ to customize field querysets; scout's verdict that issue was "bounded" meant implementation wouldn't spiral into unrelated form changes
 
 ---
 
