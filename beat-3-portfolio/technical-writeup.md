@@ -1,4 +1,4 @@
-# Filtering Django Form Dropdowns to Enforce Team Boundaries in Production Code
+# 1. Filtering Django Form Dropdowns to Enforce Team Boundaries in Production Code
 
 ## Overview
 
@@ -87,7 +87,7 @@ The next step would be to add role-based access control (RBAC) to allow differen
 
 ---
 
-# CSS Spacing Fix for Dashboard Analysis Page
+# 2. CSS Spacing Fix for Dashboard Analysis Page
 
 ## Overview
 
