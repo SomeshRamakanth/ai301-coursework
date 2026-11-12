@@ -9,3 +9,15 @@ The work showed me that open-source contribution isn't just about the code—it'
 https://github.com/ImperialCollegeLondon/proCAT/pull/865
 
 #OpenSource #Django #CodeReview #ProducationCode #TechLearning
+
+---
+
+I also contributed to qdash, an open-source analytics dashboard, where I fixed CSS spacing inconsistencies on the analysis page. The dashboard had uneven margins and padding across sections—some 12px, some 24px—creating a visually fragmented layout.
+
+I standardized all major components to 16px spacing, tested across responsive breakpoints, and got approval the same day. This was a smaller contribution but showed me the difference between fixing isolated bugs and thinking systematically about design systems.
+
+While the proCAT work taught me about professional code standards through iteration, the qdash work reinforced that sometimes the best fix is the simple one—but done well and tested thoroughly.
+
+https://github.com/oqtopus-team/qdash/pull/1729
+
+#CSS #UIDesign #OpenSource #FrontendDevelopment

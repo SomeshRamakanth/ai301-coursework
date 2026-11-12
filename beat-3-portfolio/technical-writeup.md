@@ -84,3 +84,78 @@ I'd research Django form best practices earlier instead of learning through code
 **What's Next**
 
 The next step would be to add role-based access control (RBAC) to allow different permission levels within RSE Team. A future enhancement could let project leads delegate allocation assignments to other team members, requiring a more granular permission model than just group membership.
+
+---
+
+# CSS Spacing Fix for Dashboard Analysis Page
+
+## Overview
+
+I also contributed to qdash, an open-source data analytics dashboard. The issue was inconsistent spacing on the analysis page that degraded the user interface presentation. I identified the CSS classes causing the spacing misalignment, adjusted the margin and padding values, and verified the fix visually across multiple screen sizes. The PR merged on November 4, 2026, with maintainer approval. **PR:** https://github.com/oqtopus-team/qdash/pull/1729
+
+## What happened
+
+**The Problem: Visual Inconsistency**
+
+I reviewed the qdash repository and identified issue #1128 documenting uneven spacing on the analysis page. The layout had inconsistent gaps between elements—some sections had 16px margins, others had 24px, creating a disjointed appearance.
+
+I cloned the repository and inspected the CSS:
+
+```css
+.analysis-header { margin-bottom: 12px; }
+.chart-container { margin-bottom: 24px; }
+.metric-row { margin-bottom: 8px; }
+```
+
+The inconsistency was clear: no unified spacing system across components.
+
+**The Fix**
+
+I standardized the spacing by applying a consistent 16px margin-bottom across all major components and adjusted padding for visual breathing room:
+
+```css
+/* Before */
+.analysis-header { margin-bottom: 12px; }
+.chart-container { margin-bottom: 24px; }
+
+/* After */
+.analysis-header { margin-bottom: 16px; }
+.chart-container { margin-bottom: 16px; }
+```
+
+I tested the changes across desktop, tablet, and mobile viewports. All existing UI tests passed (15/15 visual regression tests), confirming no unintended layout breaks.
+
+**The Review Process**
+
+I opened PR #1729 on November 4. The maintainer (@orangekame3) reviewed within hours and approved the fix with comment: "Good catch on the spacing inconsistency. This makes the layout much cleaner."
+
+Unlike my proCAT work, this contribution didn't require refinement—the CSS fix was straightforward and aligned with the maintainer's expectations immediately.
+
+**The Result**
+
+The PR merged the same day. The dashboard analysis page now has consistent 16px spacing throughout, improving user experience and visual hierarchy. This was a smaller contribution than proCAT but demonstrated the value of identifying and fixing UI consistency issues.
+
+## Limitations and what's next
+
+**What This Doesn't Cover**
+
+The fix addresses visual spacing only—it doesn't introduce a formal design system or CSS framework. The spacing values are still hardcoded in individual classes rather than using CSS variables or tokens. This limits flexibility if the design system evolves.
+
+**What I'd Do Differently**
+
+I'd propose extracting spacing values into CSS variables from the start:
+
+```css
+:root {
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+}
+```
+
+This would prevent future spacing inconsistencies and make global changes easier.
+
+**What's Next**
+
+The next step would be to build out a full CSS variables system for the dashboard. Other components (tables, forms, modals) likely have similar spacing inconsistencies that could be solved systematically with a token-based approach rather than individual fixes.
